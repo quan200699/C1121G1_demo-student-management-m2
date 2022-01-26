@@ -1,6 +1,8 @@
-package com.codegym;
+package com.codegym.model;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     private String id;
 
     private String name;

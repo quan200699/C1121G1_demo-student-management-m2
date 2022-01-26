@@ -1,4 +1,7 @@
-package com.codegym;
+package com.codegym.view;
+
+import com.codegym.controller.StudentManagement;
+import com.codegym.model.Student;
 
 import java.util.Scanner;
 
@@ -49,7 +52,7 @@ public class Main {
                                 String id = scanner.nextLine();
                                 int index = studentManagement.findStudentById(id);
                                 if (index != -1) {
-                                    System.out.println("Thông tin học viên cần tìm: " + studentManagement.getStudent(index));
+                                    System.out.println("Thông tin học viên cần tìm: " + studentManagement.getById(id));
                                 } else {
                                     System.out.println("Không tìm thấy");
                                 }
@@ -62,7 +65,7 @@ public class Main {
                                 String id = scanner.nextLine();
                                 int index = studentManagement.findStudentUsingBinarySearch(id);
                                 if (index != -1) {
-                                    System.out.println("Thông tin học viên cần tìm: " + studentManagement.getStudent(index));
+                                    System.out.println("Thông tin học viên cần tìm: " + studentManagement.getById(id));
                                 } else {
                                     System.out.println("Không tìm thấy");
                                 }
@@ -119,7 +122,7 @@ public class Main {
         System.out.println("Xóa thông tin học viên");
         System.out.println("Nhập mã học viên cần chỉnh sửa thông tin");
         String id = scanner.nextLine();
-        boolean isDeleted = studentManagement.deleteStudentById(id);
+        boolean isDeleted = studentManagement.deleteById(id);
         if (isDeleted) {
             System.out.println("Xóa thành công!");
         } else {
@@ -134,7 +137,7 @@ public class Main {
         int index = studentManagement.findStudentById(id);
         if (index != -1) {
             Student student = inputStudentInfo();
-            studentManagement.updateStudentById(id, student);
+            studentManagement.updateById(id, student);
             System.out.println("Cập nhật thành công!");
         } else {
             System.out.println("Cập nhật bị lỗi do không tồn tại mã học viên cần tìm!");
@@ -144,7 +147,7 @@ public class Main {
     private static void showCreateStudent(StudentManagement studentManagement) {
         System.out.println("Thêm học viên");
         Student student = inputStudentInfo();
-        studentManagement.addNewStudent(student);
+        studentManagement.addNew(student);
     }
 
     private static void showAllStudent(StudentManagement studentManagement) {
@@ -153,7 +156,7 @@ public class Main {
             System.out.println("Danh sách rỗng");
         } else {
             System.out.println("Danh sách học viên");
-            studentManagement.displayAllStudent();
+            studentManagement.displayAll();
         }
     }
 

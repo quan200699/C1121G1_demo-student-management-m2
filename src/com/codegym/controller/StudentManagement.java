@@ -1,23 +1,16 @@
-package com.codegym;
+package com.codegym.controller;
+
+import com.codegym.controller.GeneralManagement;
+import com.codegym.model.Student;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentManagement {
+public class StudentManagement implements GeneralManagement<Student> {
     private List<Student> students = new ArrayList<>();
 
     public int size() {
         return students.size();
-    }
-
-    public void addNewStudent(Student student) {
-        this.students.add(student);
-    }
-
-    public void displayAllStudent() {
-        for (Student student : students) {
-            System.out.println(student);
-        }
     }
 
     //Tìm học viên theo mã học viên
@@ -30,27 +23,6 @@ public class StudentManagement {
             }
         }
         return index;
-    }
-
-    public Student getStudent(int index) {
-        return students.get(index);
-    }
-
-    //Cập nhật thông tin học viên với mã học viên
-    public void updateStudentById(String id, Student student) {
-        int index = findStudentById(id);
-        students.set(index, student);
-    }
-
-    //Xóa thông tin học viên với mã học viên tương ứng
-    public boolean deleteStudentById(String id) {
-        int index = findStudentById(id);
-        if (index != -1) {
-            students.remove(index);
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public void bubbleSort() {
@@ -125,5 +97,40 @@ public class StudentManagement {
             }
         }
         return -1;
+    }
+
+    @Override
+    public void displayAll() {
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+
+    @Override
+    public void addNew(Student student) {
+        this.students.add(student);
+    }
+
+    @Override
+    public void updateById(String id, Student student) {
+        int index = findStudentById(id);
+        students.set(index, student);
+    }
+
+    @Override
+    public boolean deleteById(String id) {
+        int index = findStudentById(id);
+        if (index != -1) {
+            students.remove(index);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public Student getById(String id) {
+        int index = findStudentById(id);
+        return students.get(index);
     }
 }
