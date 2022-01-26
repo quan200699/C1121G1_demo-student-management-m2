@@ -1,8 +1,9 @@
 package com.codegym.controller;
 
+import java.io.IOException;
 import java.util.List;
 
-public interface ReadFile<T> {//Generic
+public interface ReadFile {
 
-    List<T> readFile(String path);
+    void readFile(String path) throws IOException, ClassNotFoundException;
 }

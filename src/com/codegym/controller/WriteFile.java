@@ -1,7 +1,7 @@
 package com.codegym.controller;
 
-import java.util.List;
+import java.io.IOException;
 
-public interface WriteFile<T> {
-    void writeFile(List<T> elements);
+public interface WriteFile {
+    void writeFile(String path) throws IOException;
 }

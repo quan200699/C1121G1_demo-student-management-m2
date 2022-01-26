@@ -1,12 +1,12 @@
 package com.codegym.controller;
 
-import com.codegym.controller.GeneralManagement;
 import com.codegym.model.Student;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentManagement implements GeneralManagement<Student> {
+public class StudentManagement implements GeneralManagement<Student>, ReadFile, WriteFile {
     private List<Student> students = new ArrayList<>();
 
     public int size() {
@@ -132,5 +132,19 @@ public class StudentManagement implements GeneralManagement<Student> {
     public Student getById(String id) {
         int index = findStudentById(id);
         return students.get(index);
+    }
+
+    @Override
+    public void readFile(String path) throws IOException, ClassNotFoundException {
+        InputStream is = new FileInputStream(path);
+        ObjectInputStream ois = new ObjectInputStream(is);
+        this.students = (List<Student>) ois.readObject();
+    }
+
+    @Override
+    public void writeFile(String path) throws IOException {
+        OutputStream os = new FileOutputStream(path);
+        ObjectOutputStream oos = new ObjectOutputStream(os);
+        oos.writeObject(this.students);
     }
 }
