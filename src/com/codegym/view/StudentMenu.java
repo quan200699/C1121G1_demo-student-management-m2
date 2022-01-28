@@ -6,7 +6,7 @@ import com.codegym.model.Student;
 import java.util.Scanner;
 
 public class StudentMenu {
-    public static Scanner scanner = new Scanner(System.in);
+    public Scanner scanner = new Scanner(System.in);
 
     public void run() {
         StudentManagement studentManagement = new StudentManagement();
@@ -78,13 +78,13 @@ public class StudentMenu {
         } while (choice != 0);
     }
 
-    private static void menuFind() {
+    private void menuFind() {
         System.out.println("1. Sử dụng tìm kiếm tuyến tính");
         System.out.println("2. Sử dụng tìm kiếm nhị phân");
         System.out.println("0. Quay lại");
     }
 
-    private static void showSortStudent(StudentManagement studentManagement) {
+    private void showSortStudent(StudentManagement studentManagement) {
         System.out.println("Sắp xếp danh sách học viên");
         int choiceSort = -1;
         do {
@@ -111,14 +111,14 @@ public class StudentMenu {
         } while (choiceSort != 0);
     }
 
-    private static void menuSort() {
+    private void menuSort() {
         System.out.println("1. Sắp xếp nổi bọt");
         System.out.println("2. Sắp xếp chọn");
         System.out.println("3. Sắp xếp chèn");
         System.out.println("0. Quay lại");
     }
 
-    private static void showDeleteStudent(StudentManagement studentManagement) {
+    private void showDeleteStudent(StudentManagement studentManagement) {
         System.out.println("Xóa thông tin học viên");
         System.out.println("Nhập mã học viên cần chỉnh sửa thông tin");
         String id = scanner.nextLine();
@@ -130,7 +130,7 @@ public class StudentMenu {
         }
     }
 
-    private static void showUpdateStudent(StudentManagement studentManagement) {
+    private void showUpdateStudent(StudentManagement studentManagement) {
         System.out.println("Chỉnh sửa thông tin học viên");
         System.out.println("Nhập mã học viên cần chỉnh sửa thông tin");
         String id = scanner.nextLine();
@@ -144,13 +144,13 @@ public class StudentMenu {
         }
     }
 
-    private static void showCreateStudent(StudentManagement studentManagement) {
+    private void showCreateStudent(StudentManagement studentManagement) {
         System.out.println("Thêm học viên");
         Student student = inputStudentInfo();
         studentManagement.addNew(student);
     }
 
-    private static void showAllStudent(StudentManagement studentManagement) {
+    private void showAllStudent(StudentManagement studentManagement) {
         int size = studentManagement.size();
         if (size == 0) {
             System.out.println("Danh sách rỗng");
@@ -160,7 +160,7 @@ public class StudentMenu {
         }
     }
 
-    private static Student inputStudentInfo() {
+    private Student inputStudentInfo() {
         System.out.println("Nhập mã học viên:");
         String id = scanner.nextLine();
         System.out.println("Nhập tên học viên:");
@@ -175,7 +175,7 @@ public class StudentMenu {
         return student;
     }
 
-    private static void menu() {
+    private void menu() {
         System.out.println("1. Hiển thị danh sách học viên");
         System.out.println("2. Thêm học viên mới");
         System.out.println("3. Cập nhật học viên");

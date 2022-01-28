@@ -5,7 +5,7 @@ import com.codegym.controller.ClazzManagement;
 import java.util.Scanner;
 
 public class ClazzMenu {
-    public static Scanner scanner = new Scanner(System.in);
+    public Scanner scanner = new Scanner(System.in);
 
     public void run() {
         ClazzManagement clazzManagement = new ClazzManagement();
@@ -24,7 +24,7 @@ public class ClazzMenu {
         } while (choice != 0);
     }
 
-    private static void menu() {
+    private void menu() {
         System.out.println("1. Hiển thị danh sách lớp");
         System.out.println("2. Thêm lớp học mới");
         System.out.println("3. Cập nhật thông tin lớp học");
