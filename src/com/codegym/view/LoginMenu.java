@@ -1,5 +1,6 @@
 package com.codegym.view;
 
+import com.codegym.DuplicateUsernameException;
 import com.codegym.controller.UserManagement;
 import com.codegym.model.User;
 
@@ -9,6 +10,7 @@ public class LoginMenu {
     public Scanner scanner = new Scanner(System.in);
     private UserManagement userManagement = new UserManagement();
     private ManagementMenu managementMenu = new ManagementMenu();
+    private StudentMenu studentMenu = new StudentMenu();
 
     public void run() {
         int choice = -1;
@@ -24,7 +26,11 @@ public class LoginMenu {
                     break;
                 }
                 case 2: {
-                    doRegister();
+                    try {
+                        doRegister();
+                    } catch (DuplicateUsernameException e) {
+                        System.err.println("Tài khoản này đã được đăng ký!");
+                    }
                     break;
                 }
             }
@@ -39,19 +45,25 @@ public class LoginMenu {
         boolean isLogin = userManagement.checkUserLogin(username, password);
         if (isLogin) {
             System.out.println("Đăng nhập thành công!");
-            managementMenu.run();
+            User currentUser = userManagement.findUserByUsername(username);
+            boolean isAdmin = userManagement.isAdmin(currentUser);
+            if (isAdmin) {
+                managementMenu.run();
+            } else {
+                studentMenu.run();
+            }
         } else {
             System.err.println("Username hoặc password không đúng!");
         }
     }
 
-    private void doRegister() {
+    private void doRegister() throws DuplicateUsernameException {
         System.out.println("Đăng ký tài khoản mới!");
         User user = createUser();
         userManagement.register(user);
     }
 
-    private User createUser() {
+    private User createUser() throws DuplicateUsernameException {
         String username = inputUsername();
         String password = inputPassword();
         User user = new User(username, password);
@@ -72,7 +84,7 @@ public class LoginMenu {
         return password;
     }
 
-    private String inputUsername() {
+    private String inputUsername() throws DuplicateUsernameException {
         String username;
         do {
             System.out.println("Nhập tên tài khoản (6-12 ký tự):");
@@ -82,7 +94,7 @@ public class LoginMenu {
             } else if (username.length() > 12) {
                 System.err.println("Tài khoản chỉ được phép tối đa 12 ký tự!");
             } else if (userManagement.checkUsernameExist(username)) {
-                System.err.println("Tài khoản này đã được đăng ký!");
+                throw new DuplicateUsernameException();
             }
             try {
                 Thread.sleep(1000);

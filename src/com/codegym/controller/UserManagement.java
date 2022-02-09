@@ -39,7 +39,7 @@ public class UserManagement implements ReadFile, WriteFile {
     public void readFile(String path) throws IOException, ClassNotFoundException {
         InputStream is = new FileInputStream(path);
         ObjectInputStream ois = new ObjectInputStream(is);
-        this.users = (List<User>) ois.readObject();
+        this.users = (List<User>) ois.readObject(); //readobject trả về kiểu object => sẽ phải ép kiểu
     }
 
     @Override
@@ -69,5 +69,21 @@ public class UserManagement implements ReadFile, WriteFile {
             }
         }
         return isLogin;
+    }
+
+    public boolean isAdmin(User user) {
+        if (user.getRole().equals("ROLE_ADMIN")) {
+            return true;
+        }
+        return false;
+    }
+
+    public User findUserByUsername(String username) {
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user;
+            }
+        }
+        return null;
     }
 }
